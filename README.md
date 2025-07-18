@@ -36,8 +36,9 @@ cryptocurrency\_liquidity\_project/
 │   ├── EDA\_Report.pdf
 │   ├── HLD.pdf
 │   ├── LLD.pdf
-│   ├── Final\_Report.pdf
-│   └── pipeline\_architecture.png
+│   ├── Final_Report.pdf
+│   ├── pipeline_architecture.png
+│   └── pipeline_architecture_doc.txt
 ├── requirements.txt
 └── README.md
 
