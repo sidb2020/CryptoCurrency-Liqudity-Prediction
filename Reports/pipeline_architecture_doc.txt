@@ -1,0 +1,33 @@
+Pipeline Architecture Document
+
+1. Data Collection
+   - Historical crypto market data from CoinGecko in CSV format.
+   - Two separate dates: 2022-03-16 and 2022-03-17.
+
+2. Data Preparation (data_preparation_ml_project_sid.py)
+   - Reads both CSV files, appends a 'date' column to distinguish sources.
+   - Drops unused columns (e.g., id, symbol, image).
+   - Removes rows with missing or invalid values.
+   - Outputs: merged_cleaned_crypto_data.csv
+
+3. Feature Engineering (feature_engineering_ml_project_sid.py)
+   - Derives features:
+       * liquidity_ratio = total_volume / market_cap
+       * price_change_ratio = price_change_percentage_24h / current_price
+       * cap_per_supply = market_cap / circulating_supply (if available)
+   - Categorizes liquidity_level using quantile-based binning (qcut).
+   - Outputs: engineered_crypto_data.csv
+
+4. Model Training (model_training_ml_project_sid.py)
+   - Splits data into training and testing sets.
+   - Scales features using StandardScaler.
+   - Trains a RandomForestClassifier on the features.
+   - Saves model (trained_model.pkl) and scaler (scaler.pkl)
+
+5. Prediction Interface (app_ml_project_sid.py)
+   - Streamlit app collects user input for real-time prediction.
+   - Calculates features on-the-fly, scales them, and predicts liquidity level.
+   - Displays the result to the user in a clean interface.
+
+This architecture ensures reusability, modularity, and simplicity.
+Each step is designed to work independently and integrates cleanly with the next.
